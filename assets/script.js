@@ -20,35 +20,44 @@ const slides = [
 
 let indexImage = 0;
 
-const idImage = document.getElementById("image")
-const arrowLeft = document.getElementById("arrowLeft")
-const arrowRight = document.getElementById("arrowRight") 
+const idImage = document.getElementById("image");
+const arrowLeft = document.getElementById("arrowLeft");
+const arrowRight = document.getElementById("arrowRight");
 
-function afficheImage() {
-	idImage.src = "./assets/images/slideshow/" + slides[indexImage].image;
-	document.querySelector("#banner p").innerHTML = slides[indexImage].tagLine
+function main()	{
+	nextSlide();
+	prevSlide();
 }
 
-arrowRight.addEventListener("click", function() {
+function nextSlide() {
+	arrowRight.addEventListener("click", function() {
 	if (indexImage < slides.length -1) {
-		indexImage++
-		afficheImage()
+		indexImage++;
+
 	}
 	else {
-		indexImage = 0
-		afficheImage()
+		indexImage = 0;	
 	}
-})
+	updateSlide();
+	})
+}
 
-arrowLeft.addEventListener("click", function() {
+function prevSlide() {
+	arrowLeft.addEventListener("click", function() {
 	if (indexImage > 0) {
-		indexImage--
-		afficheImage()
+		indexImage--;
 	}
 	else {
-		indexImage = slides.length - 1
-		afficheImage()
+		indexImage = slides.length - 1;
+		
 	}
-})
+	updateSlide();
+	})
+}
 
-afficheImage()
+main();
+
+function updateSlide() {
+	idImage.src = "./assets/images/slideshow/" + slides[indexImage].image;
+	document.querySelector("#banner p").innerHTML = slides[indexImage].tagLine;
+}
